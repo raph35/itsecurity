@@ -1,22 +1,8 @@
-// Code by Raphael
-
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include "global.h"
+#include "printhello.h"
 
-char* nameptr;
-char* ucnameptr;
 const char OFFSET = 'a' - 'A';
-
-/**
- * @brief This function will print hello followed by the first argument
- *          of the programm
- * @param int n the number of loop for the hello
- * @return void
- * */
-void printhello(int n);
-
 
 int main(int argc, char* argv[]){
     // Checking if there are no argument
@@ -60,15 +46,4 @@ int main(int argc, char* argv[]){
     // free(nameptr);
 
     return 0;
-}
-
-void printhello(int n){
-    const char* helloptr = "Hello ";
-    for(int i = 0; i < n; i++){
-        printf("%s%s:%s\n",helloptr, nameptr, ucnameptr);
-    }
-    // Instrumentation system
-    printf("%p (*ucnameptr) %p (*nameptr) %p (*helloptr)\n", ucnameptr, &*nameptr, &(*helloptr));
-    printf("%p (nameptr) %p (helloptr)\n", &nameptr, &helloptr);
-    printf("%p (printhello) %p (printf) %p (main)\n", &printhello, &printf, &main);
 }

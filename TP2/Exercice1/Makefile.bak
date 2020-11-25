@@ -1,0 +1,80 @@
+# This makefile is created by Raphael
+# on Wednesday 25, November
+
+CC=gcc
+CFLAGS=-Wall
+LDPATH=.
+LDFLAGS=-lprinthello -Wl,-rpath,$(LDPATH)
+
+### Configuration of output file ###
+EXEC_NAME=hello
+EXEC_DIR=.
+EXEC=$(EXEC_DIR)/$(EXEC_NAME)
+SRC_DIR=.
+INC_DIR=.
+OBJ_DIR=.
+SRC=$(wildcard $(SRC_DIR)/*.c)
+_OBJ=$(SRC:.c=.o)
+OBJ = $(subst $(SRC_DIR)/,$(OBJ_DIR)/,$(_OBJ))
+
+###     The main rule
+all: $(EXEC)
+
+###     Compilation of the main file(linking) ###
+$(EXEC): $(OBJ)
+	@echo 'Compiling program'
+	$(CC) -o $@ $^ $(LDFLAGS) $(LDFLAGS) -L$(LDPATH)
+
+###     Creation of objects of all sources files ###
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@echo 'Créating objects files'
+	$(CC) -o $@ -c $< $(LDFLAGS)
+
+### Clean rules ###
+clean:
+	rm -f $(OBJ_DIR)/*.o
+	rm a.out hello
+
+
+# CC=g++
+# CFLAGS=-Wall
+# LDFLAGS=
+# EXEC=Spline.exe
+# SRC=$(wildcard *.cpp)
+# _OBJ=$(SRC:.cpp=.o)
+# OBJ = $(subst src/,obj/,$(_OBJ))
+# SRC_DIR=.
+# INC_DIR=.
+# OBJ_DIR=.
+
+# all: $(EXEC)
+
+# $(EXEC): $(OBJ)
+#         @echo 'Compilation du programme'
+#         $(CC) -o $@ $^ $(LDFLAGS)
+
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+#         @echo 'Création des fichiers objets'
+#         $(CC) -o $@ -c $< $(LDFLAGS)
+
+# CC = gcc
+# CFLAG = -g -Wall -fpic
+# LDFLAG = -lprinthello
+# LDPATH = .
+# _SRC = $(wildcard *.c)
+# SRC = $(subst .c,,$(_SRC))
+# TARGET = main
+
+# all: $(TARGET)
+
+# $(TARGET): $(SRC).o
+# 	@echo 'Compilation du programme'
+# 	$(CC) $(CFLAG) -o $@ $^
+
+# %.o : %.c
+# 	@echo 'Compilation des fichiers sources'
+# 	$(CC) $(CFLAG) -o $@ -c $<
+
+# clean:
+# 	@echo $(SRC)
+# 	rm -f *.o
